@@ -24,17 +24,9 @@ namespace Nexos.Infrastructure
     {
         public static void SetUp(IServiceCollection services, IConfiguration configuration)
         {
-            ConfigureContext(services, configuration);
             ConfigureIOC(services);
             ConfigureMediador(services);
             ConfigureMapper(services);
-        }
-
-        private static void ConfigureContext(IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<NexosDbContext>(options =>
-            options.UseOracle(
-                    configuration.GetConnectionString("NexosConnectionString")));
         }
 
         private static void ConfigureIOC(IServiceCollection services)
