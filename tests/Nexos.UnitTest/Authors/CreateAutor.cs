@@ -32,7 +32,6 @@ namespace Nexos.UnitTest.Authors
 
             var command = new CreateAuthorCommand
             {
-                Id = id,
                 Name = name,
                 Email = email,
                 CityOfBirth = city,

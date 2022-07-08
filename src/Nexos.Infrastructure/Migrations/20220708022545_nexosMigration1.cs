@@ -5,16 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Nexos.Infrastructure.Migrations
 {
-    public partial class NexosMugration1 : Migration
+    public partial class nexosMigration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "Nexos");
-
             migrationBuilder.CreateTable(
                 name: "Autor",
-                schema: "Nexos",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "NVARCHAR2(450)", nullable: false),
@@ -30,11 +26,10 @@ namespace Nexos.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Libro",
-                schema: "Nexos",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "NVARCHAR2(450)", nullable: false),
-                    autorId = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
+                    AuthorId = table.Column<string>(type: "NVARCHAR2(450)", nullable: false),
                     nombre_autor = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     titulo = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     anno = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
@@ -44,18 +39,27 @@ namespace Nexos.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Libro", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Libro_Autor_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Autor",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Libro_AuthorId",
+                table: "Libro",
+                column: "AuthorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Autor",
-                schema: "Nexos");
+                name: "Libro");
 
             migrationBuilder.DropTable(
-                name: "Libro",
-                schema: "Nexos");
+                name: "Autor");
         }
     }
 }

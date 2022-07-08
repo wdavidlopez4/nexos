@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nexos.Domain.Authors;
 using Nexos.Domain.Books;
 using Nexos.Infrastructure;
@@ -18,19 +19,17 @@ namespace Nexos.Infrastructure.Books
             //configurar nombre de tabla
             builder.ToTable("Libro");
 
-            //configurar primary key
-            builder.HasKey(x => x.Id);
-
-            //configuracion feren key
-            builder.OwnsOne(x => x.AuthorId)
-                .Property(x => x.Value)
-                .HasColumnName("autorId");
-
-            //configurar propiedades
+            //configurar VO
             builder.Property(x => x.Id)
                .HasConversion(y => y.Value, y => new BookId(y))
                .HasColumnName("id");
 
+            builder.Property(x => x.AuthorId)
+               .HasConversion(y => y.Value, y => new AuthorId(y))
+               .HasColumnName("AuthorId");
+
+
+            //configurar propiedades
             builder.Property(x => x.AuthorName)
                 .HasColumnName(nameof(Book.AuthorName))
                 .HasColumnName("nombre_autor");
@@ -50,6 +49,14 @@ namespace Nexos.Infrastructure.Books
             builder.Property(x => x.PageNumber)
                 .HasColumnName(nameof(Book.PageNumber))
                 .HasColumnName("numero_pagina");
+
+            //configurar primary key
+            builder.HasKey(x => x.Id);
+
+            //clave foranea
+            builder.HasOne<Author>()
+                .WithMany()
+                .HasForeignKey(x => x.AuthorId);
         }
     }
 }

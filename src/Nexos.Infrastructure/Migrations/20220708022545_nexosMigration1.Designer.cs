@@ -12,14 +12,13 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace Nexos.Infrastructure.Migrations
 {
     [DbContext(typeof(NexosDbContext))]
-    [Migration("20220707054928_NexosMugration1")]
-    partial class NexosMugration1
+    [Migration("20220708022545_nexosMigration1")]
+    partial class nexosMigration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Nexos")
                 .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -52,7 +51,7 @@ namespace Nexos.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Autor", "Nexos");
+                    b.ToTable("Autor", (string)null);
                 });
 
             modelBuilder.Entity("Nexos.Domain.Books.Book", b =>
@@ -64,6 +63,11 @@ namespace Nexos.Infrastructure.Migrations
                     b.Property<DateTime>("Anno")
                         .HasColumnType("TIMESTAMP(7)")
                         .HasColumnName("anno");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(450)")
+                        .HasColumnName("AuthorId");
 
                     b.Property<string>("AuthorName")
                         .IsRequired()
@@ -86,30 +90,17 @@ namespace Nexos.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Libro", "Nexos");
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Libro", (string)null);
                 });
 
             modelBuilder.Entity("Nexos.Domain.Books.Book", b =>
                 {
-                    b.OwnsOne("Nexos.Domain.Authors.AuthorId", "AuthorId", b1 =>
-                        {
-                            b1.Property<string>("BookId")
-                                .HasColumnType("NVARCHAR2(450)");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("NVARCHAR2(2000)")
-                                .HasColumnName("autorId");
-
-                            b1.HasKey("BookId");
-
-                            b1.ToTable("Libro", "Nexos");
-
-                            b1.WithOwner()
-                                .HasForeignKey("BookId");
-                        });
-
-                    b.Navigation("AuthorId")
+                    b.HasOne("Nexos.Domain.Authors.Author", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

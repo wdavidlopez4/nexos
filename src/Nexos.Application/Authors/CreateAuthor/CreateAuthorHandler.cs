@@ -22,10 +22,10 @@ namespace Nexos.Application.Authors.CreateAuthor
             Author author;
 
             author = Author.Build(
-                id: new AuthorId(request.Id),
+                id: new AuthorId(Guid.NewGuid().ToString()),
                 name: request.Name,
                 dateOfBirth: request.DateOfBirth,
-                email: new AuthorEmail(request.Id),
+                email: new AuthorEmail(request.Email),
                 cityOfBirth: request.CityOfBirth);
 
             await repository.Save(author);

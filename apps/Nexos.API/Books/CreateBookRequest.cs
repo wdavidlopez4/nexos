@@ -2,7 +2,6 @@
 {
     public class CreateBookRequest
     {
-        public string Id { get; set; }
 
         public string AuthorId { get; set; }
 

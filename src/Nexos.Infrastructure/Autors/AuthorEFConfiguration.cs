@@ -17,11 +17,7 @@ namespace Nexos.Infrastructure.Autors
             //configurar nombre de tabla
             builder.ToTable("Autor");
 
-            //configurar primary key
-            builder.HasKey(x => x.Id);
-
-            //configuracion propiedades
-
+            //configuracion VO
             builder.Property(x => x.Id)
                 .HasConversion(y => y.Value, y => new AuthorId(y))
                 .HasColumnName("id");
@@ -30,6 +26,7 @@ namespace Nexos.Infrastructure.Autors
                 .HasConversion(y => y.Value, y => new AuthorEmail(y))
                 .HasColumnName("correo");
 
+            //configuracion propiedades
             builder.Property(x => x.Name)
                 .HasColumnName(nameof(Author.Name))
                 .HasColumnName("nombre");
@@ -41,6 +38,9 @@ namespace Nexos.Infrastructure.Autors
             builder.Property(x => x.CityOfBirth)
                 .HasColumnName(nameof(Author.CityOfBirth))
                 .HasColumnName("ciudad_cumpleanos");
+
+            //configurar primary key
+            builder.HasKey(x => x.Id);
         }
     }
 }

@@ -27,7 +27,6 @@ namespace Nexos.API.Authors
 
             var command = new CreateAuthorCommand
             {
-                Id = request.Id,
                 CityOfBirth = request.CityOfBirth,
                 DateOfBirth = request.DateOfBirth,
                 Email = request.Email,

@@ -28,7 +28,6 @@ namespace Nexos.API.Books
 
             var command = new CreateBookCommand
             {
-                Id = request.Id,
                 Anno = request.Anno,
                 AuthorId = request.AuthorId,
                 AuthorName = request.AuthorName,

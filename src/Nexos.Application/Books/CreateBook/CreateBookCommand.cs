@@ -9,8 +9,6 @@ namespace Nexos.Application.Books.CreateBook
 {
     public class CreateBookCommand : IRequest<int>
     {
-        public string Id { get; set; }
-
         public string AuthorId { get; set; }
 
         public string Title { get; set; }

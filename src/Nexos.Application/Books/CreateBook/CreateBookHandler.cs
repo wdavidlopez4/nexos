@@ -23,7 +23,7 @@ namespace Nexos.Application.Books.CreateBook
             Book book;
 
             book = Book.Build(
-                id: new BookId(request.Id),
+                id: new BookId(Guid.NewGuid().ToString()),
                 authorName: request.AuthorName,
                 authorId: new AuthorId(request.AuthorId),
                 title: request.Title,

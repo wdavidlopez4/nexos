@@ -19,14 +19,11 @@ namespace Nexos.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseOracle("User Id=c##nexos_db_prueba; Password=123456; Data Source=localhost:1521/XE;");
+            optionsBuilder.UseOracle("User Id=nexos_db_prueba; Password=123456; Data Source=localhost:1521/XE;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //nombre de esquema de este modulo
-            modelBuilder.HasDefaultSchema("Nexos");
-
             //configuracion de entidades
             modelBuilder.ApplyConfiguration(new AuthorEFConfiguration());
             modelBuilder.ApplyConfiguration(new BooksEFConfiguration());

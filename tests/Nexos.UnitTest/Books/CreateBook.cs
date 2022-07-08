@@ -35,7 +35,6 @@ namespace Nexos.UnitTest.Books
 
             var command = new CreateBookCommand
             {
-                Id = id,
                 AuthorName = name,
                 Anno = anno,
                 AuthorId = autorId,
