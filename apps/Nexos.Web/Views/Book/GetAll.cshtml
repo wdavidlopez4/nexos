@@ -1,0 +1,53 @@
+﻿@using Nexos.Web.Models
+@model List<Book>
+
+@{
+    ViewData["Title"] = "resultados";
+}
+
+@if (Model is not null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">crear libro</th>
+                <th scope="col">año</th>
+                <th scope="col">nombre autor</th>
+                <th scope="col">genero</th>
+                <th scope="col">numero de pagina</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <th scope="row">
+                        
+                        <a class="btn btn-outline-info" 
+                           asp-area="" 
+                           asp-controller="Auyhore" 
+                           asp-action="Create"
+                           asp-route-idAuotr="@book.AuthorId">Ir
+                        </a>
+                    </th>
+                  <td>@book.Anno</td>
+                  <td>@book.AuthorName</td>
+                  <td>@book.Genero</td>
+                  <td>@book.PageNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Sin resultados
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">no hay resultados</h5>
+        </div>
+    </div>
+}

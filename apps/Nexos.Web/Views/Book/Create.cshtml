@@ -1,0 +1,72 @@
+﻿@using Nexos.Web.Models
+@model Book
+
+@{
+    ViewData["Title"] = "crear Athore";
+}
+
+<div class="row">
+
+    <!--card de informacion-->
+    <div class="col-6">
+        <div class="card mb-3">
+            <img src="https://i0.wp.com/sabemos.es/wp-content/uploads/2016/05/Salvador-Dal%C3%AD.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Información del autor</h5>
+                <p class="card-text">En este apartado ingrese la información del autor</p>
+                <p class="card-text"><small class="text-muted">autores</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-row">
+
+       
+            <form method="post" asp-controller="Book" asp-action="Create" class="form-group">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Anno" class="control-label">año</label>
+                    <input asp-for="Anno" type="text" class="form-control" required/>
+                    <span asp-validation-for="Anno" class="text-danger"></span>
+                </div>
+
+                
+                <div class="form-group">
+                    <label asp-for="AuthorName" class="control-label">nombre autor</label>
+                    <input asp-for="AuthorName" type="date" class="form-control" required/>
+                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                </div>
+
+              
+                <div class="form-group">
+                    <label asp-for="Genero" class="control-label">genero</label>
+                    <input asp-for="Genero" type="email" class="form-control" required/>
+                    <span asp-validation-for="Genero" class="text-danger"></span>
+                </div>
+
+                
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">titulo</label>
+                    <input asp-for="Title" type="email" class="form-control" required/>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group m-3">
+                    <div class="row">
+                        <!--enviar formulario-->
+                        <div class="col-sm">
+                            <input type="submit" value="Crear" class="btn btn-outline-dark" />
+                        </div>
+                        <!--regresar a la lista de mensajes-->
+                        <div class="col-sm">
+                            <a class="btn btn-outline-dark" asp-area="" asp-controller="Book" asp-action="Index">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

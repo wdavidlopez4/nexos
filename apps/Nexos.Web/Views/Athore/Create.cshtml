@@ -1,0 +1,77 @@
+﻿@using Nexos.Web.Models
+@model Athore
+
+@{
+    ViewData["Title"] = "crear Athore";
+}
+
+<div class="row">
+
+    <!--card de informacion-->
+    <div class="col-6">
+        <div class="card mb-3">
+            <img src="https://i0.wp.com/sabemos.es/wp-content/uploads/2016/05/Salvador-Dal%C3%AD.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Información del autor</h5>
+                <p class="card-text">En este apartado ingrese la información del autor</p>
+                <p class="card-text"><small class="text-muted">autores</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-row">
+
+            <!--formulario de informacion-->
+            <form method="post" asp-controller="Athore" asp-action="Create" class="form-group">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!--nombre-->
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">nombre completo</label>
+                    <input asp-for="Name" type="text" class="form-control" required/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!--fecha de nacimiento-->
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" class="control-label">fecha de nacimiento</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" required/>
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+
+                <!--correo electronico-->
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">correo electronico</label>
+                    <input asp-for="Email" type="email" class="form-control" required/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <!--ciudad de nacimiento-->
+                <div class="form-group">
+                    <label asp-for="CityOfBirth" class="control-label">ciudad de nacimiento</label>
+                    <select class="form-control" aria-label="Seleccione una ciudad" asp-for="CityOfBirth" required>
+                        <option selected>ver opciones de ciudades</option>
+                        <option value="medellin">Medellin</option>
+                        <option value="bogota">Bogota</option>
+                        <option value="tunja">Tunja</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group m-3">
+                    <div class="row">
+                        <!--enviar formulario-->
+                        <div class="col-sm">
+                            <input type="submit" value="Crear" class="btn btn-outline-dark" />
+                        </div>
+                        <!--regresar a la lista de mensajes-->
+                        <div class="col-sm">
+                            <a class="btn btn-outline-dark" asp-area="" asp-controller="Athore" asp-action="Index">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
