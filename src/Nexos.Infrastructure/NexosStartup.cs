@@ -30,6 +30,7 @@ namespace Nexos.Infrastructure
 
         private static void ConfigureIOC(IServiceCollection services)
         {
+            services.AddSingleton<NexosDbContext>();
             services.AddScoped<IAuthorRepository, AuthorRepositoryOracle>();
             services.AddScoped<IBooksRepository, BooksRepositoryOracle>();
             services.AddScoped<IMapObject, MapObject>();

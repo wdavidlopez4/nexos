@@ -10,24 +10,31 @@ namespace Nexos.Infrastructure.Autors
 {
     public class AuthorRepositoryOracle : IAuthorRepository
     {
-        public Task Commit()
+        private readonly NexosDbContext context;
+
+        public AuthorRepositoryOracle(NexosDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+
+        public async Task Commit()
+        {
+            await context.SaveChangesAsync();
         }
 
         public bool Exists(Expression<Func<Author, bool>> expression)
         {
-            throw new NotImplementedException();
+            return context.Authors.AsQueryable().Any(expression);
         }
 
-        public Task<Author> Get(Expression<Func<Author, bool>> expression)
+        public async Task<Author> Get(Expression<Func<Author, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await context.Authors.FindAsync(expression);
         }
 
-        public Task Save(Author user)
+        public async Task Save(Author user)
         {
-            throw new NotImplementedException();
+            await context.Authors.AddAsync(user);
         }
     }
 }

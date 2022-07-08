@@ -1,4 +1,5 @@
-﻿using Nexos.Domain.Books;
+﻿using Microsoft.EntityFrameworkCore;
+using Nexos.Domain.Books;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +11,38 @@ namespace Nexos.Infrastructure.Books
 {
     public class BooksRepositoryOracle : IBooksRepository
     {
-        public Task Commit()
+        private readonly NexosDbContext context;
+
+        public BooksRepositoryOracle(NexosDbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+
+        public async Task Commit()
+        {
+            await context.SaveChangesAsync();
         }
 
         public int Count()
         {
-            throw new NotImplementedException();
+            return context.Books.Count();
         }
 
         public bool Exists(Expression<Func<Book, bool>> expression)
         {
-            throw new NotImplementedException();
+            return context.Books.AsQueryable().Any(expression);
         }
 
-        public Task<List<Book>> GetAll(Expression<Func<Book, bool>> expression)
+        public async Task<List<Book>> GetAll(Expression<Func<Book, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await context.Books
+                .Where(expression)
+                .ToListAsync();
         }
 
-        public Task Save(Book user)
+        public async Task Save(Book user)
         {
-            throw new NotImplementedException();
+            await context.Books.AddAsync(user);
         }
     }
 }

@@ -42,16 +42,16 @@ namespace Nexos.API.Books
 
         [HttpGet]
         [Route("GetAll")]
-        public async Task<IActionResult> GetAll(SearchBooksByKeywordRequest request)
+        public async Task<IActionResult> GetAll(string? authorName, string? title, DateTime? anno)
         {
             if (!ModelState.IsValid)
                 throw new Exception("modelo invalido");
 
             var query = new SearchBooksByKeywordQuery
             {
-                Anno = request.Anno,
-                AuthorName = request.AuthorName,
-                Title = request.Title
+                Anno = anno,
+                AuthorName = authorName,
+                Title = title
             };
 
             var dto = await mediator.Send(query);
